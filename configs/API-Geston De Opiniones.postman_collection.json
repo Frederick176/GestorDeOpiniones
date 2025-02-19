@@ -1,0 +1,23 @@
+{
+	"info": {
+		"_postman_id": "02a88301-a30d-4973-a783-54ff74287f82",
+		"name": "API-Geston De Opiniones",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "41829896"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
