@@ -8,10 +8,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const updateUser = async (req, res) => {
     try{
-        const { uid } = req.params
+        const { _id } = req.usuario
         const data = req.body
 
-        const user = await User.findByIdAndUpdate(uid, data, { new: true});
+        const user = await User.findByIdAndUpdate(_id, data, { new: true});
 
         res.status(200).json({
             success: true,
@@ -29,7 +29,7 @@ export const updateUser = async (req, res) => {
 
 export const updateProfilePicture = async (req, res) => {
     try{
-        const { uid } = req.params
+        const { _id } = req.usuario
         let newProfilePicture = req.file ? req.file.filename : null
 
         if(!newProfilePicture){
@@ -39,7 +39,7 @@ export const updateProfilePicture = async (req, res) => {
             })
         }
 
-        const user = await User.findById(uid)
+        const user = await User.findById(_id)
 
         if(user.profilePicture){
             const oldProfilePicture = join(__dirname, "../../public/uploads/profile-pictures", user.profilePicture)
@@ -65,23 +65,32 @@ export const updateProfilePicture = async (req, res) => {
 
 export const updatePassword = async (req, res) => {
     try{
-        const { uid } = req.params
-        const { newPassword } = req.body
+        const { _id } = req.usuario
+        const { newPassword, oldPassword } = req.body
         
-        const user = await User.findById(uid)
+        const user = await User.findById(_id)
 
-        const matchOldAndNewPassword = await verify(user.password, newPassword)
+        const matchNewPassword = await verify(user.password, newPassword)
 
-        if(matchOldAndNewPassword){
+        if(matchNewPassword){
             return res.status(400).json({
                 success: false,
                 message: "La nueva contaseña no puede ser igual a la anterior contrseña que tenias"
             })
         }
 
+        const matchOldPassword = await verify(user.password, oldPassword)
+
+        if(!matchOldPassword){
+            return res.status(400).json({
+                success: false,
+                message: "Pot favor ingresa tu contraseña actual"
+            })
+        }
+
         const encryptedPassword = await hash(newPassword)
 
-        await User.findByIdAndUpdate(uid, {password: encryptedPassword}, {new: true})
+        await User.findByIdAndUpdate(_id, {password: encryptedPassword}, {new: true})
 
         return res.status(200).json({
             success: true,

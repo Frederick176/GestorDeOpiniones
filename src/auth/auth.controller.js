@@ -4,7 +4,7 @@ import { generateJWT } from "../helpers/generate-jwt.js"
 
 export const register = async (req, res) => {
     try{
-        const data = req.body
+        const data = req.body;
         let profilePicture = req.file ? req.file.filename : null
         const encryptedPassword = await hash(data.password)
         data.password = encryptedPassword
@@ -14,7 +14,7 @@ export const register = async (req, res) => {
 
         return res.status(201).json({
             message: "User has been created",
-            name: user.name,
+            name: user.username,
             email: user.email
         });
     }catch(err){
@@ -28,7 +28,7 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     const { email, username, password } = req.body
     try{
-        const user = await User.fingOne({
+        const user = await User.findOne({
             $or:[{email: email}, {username: username}]
         })
 
