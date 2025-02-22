@@ -1,19 +1,205 @@
 {
 	"info": {
-		"_postman_id": "02a88301-a30d-4973-a783-54ff74287f82",
+		"_postman_id": "5e7ba098-6c99-463b-b4a9-c9b9ae7e37d9",
 		"name": "API-Geston De Opiniones",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
-		"_exporter_id": "41829896"
+		"_exporter_id": "37606339"
 	},
 	"item": [
 		{
 			"name": "Auth",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Register",
 					"request": {
-						"method": "GET",
-						"header": []
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Lizandro",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Perez",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "perezLiz098",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "lperez0036@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "phone",
+									"value": "20894533",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "Contra079!!",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "AUTOR_ROLE",
+									"type": "text"
+								},
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/sandr/OneDrive/Documents/Lizandro/Kinal 2025/Taller 3/Bimestre I/Laboratorio #1/HTML y CSS/assets/img/SPYxFAMILY.jpg"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"perezLiz098\",\r\n    \"password\": \"Contra079!!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/auth/login"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Actalizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/user/updateUser/"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Contraseña",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/user/updatePassword"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Foto",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": {
+								"algorithm": "HS256",
+								"isSecretBase64Encoded": false,
+								"payload": "{}",
+								"addTokenTo": "header",
+								"headerPrefix": "Bearer",
+								"queryParamKey": "token",
+								"header": "{}"
+							}
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profilePicture",
+									"type": "file",
+									"src": "/C:/Users/sandr/OneDrive/Documents/Lizandro/Kinal 2025/Taller 3/Bimestre I/Laboratorio #1/HTML y CSS/assets/img/Dragon Ball.jpg"
+								}
+							]
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/user/updateProfilePicture"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publications",
+			"item": [
+				{
+					"name": "Agregar publicacion",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"adffdafd\",\r\n    \"category\": \"adfdafdf\",\r\n    \"mainText\": \"afddfdafdf\",\r\n    \"email\": \"lperez0036@gmail.com\" \r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/publications/addPublications"
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar publicacion",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Estoy en mi casa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/publications/updatePublications"
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar publicacion",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": "http://127.0.0.1:3000/gestionDeOpiniones/v1/publications//deletePublications"
 					},
 					"response": []
 				}
